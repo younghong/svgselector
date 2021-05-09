@@ -32,9 +32,21 @@ scalename.innerText="scale:false";
 
 createBackgroundSVG("ROOTSVG",400,400,'green');
 createSelector();
+testitme();
 
 var svg = document.getElementById("ROOTSVG");
 svg.addEventListener("mousedown", canvasMouseDownHandler);
 
+
+
+
+
+window.addEventListener('copy', function (e){
+    document.execCommand('copy');
+    var retUrl = document.URL;
+    e.preventDefault();
+    e.clipboardData.setData('text/plain', document.getSelection() + 
+                            "\n\n[출처]"+retUrl+"  [test]");
+}, false)
 
 
