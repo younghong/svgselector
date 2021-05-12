@@ -7,6 +7,25 @@
 
 
 
+getRect = (x,y,w,h) => {
+    
+    //let color = '#'+Math.round(0xffffff * Math.random()).toString(16);
+    let color = '#ffe0e0';
+
+    var rect = document.createElementNS(svgns, 'rect');
+    rect.setAttributeNS(null, 'x', x);
+    rect.setAttributeNS(null, 'y', y);
+    rect.setAttributeNS(null, 'width', w);
+    rect.setAttributeNS(null, 'height', h);
+    rect.setAttributeNS(null, 'fill', color);
+
+    rect.setAttributeNS(null, 'stroke-width', 1);
+    rect.setAttributeNS(null, 'stroke', '#ff0000');
+    rect.setAttributeNS(null, 'stroke-dasharray', '4');
+    
+    return rect;
+}
+
 
 
 function Item() {
@@ -15,7 +34,14 @@ function Item() {
     this.element;
     this.properties=['id','x','y','width','height','backgroundColor','borderType','borderColor','borderWeight'];
 
+    this.init = function(){
 
+    }
+
+    this.createElement = function(){
+        let rect = getRect(0,0,w,h);
+        let child = getOverlapGraphic([rect],'rect',x,y);
+    }
 
     this.setElement = function(element){
         this.element=element;
@@ -23,8 +49,6 @@ function Item() {
     this.getElement = function(){
         return this.element;
     }
-
-
 
     this.setProperty = function(name,value){
         this[name] = value;
