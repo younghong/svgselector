@@ -19,6 +19,7 @@ updateSelector = (target) => {
     n = document.getElementById('selector-n');
     se = document.getElementById('selector-se');
     sw = document.getElementById('selector-sw');
+
     s = document.getElementById('selector-s');
     w = document.getElementById('selector-w');
 
@@ -120,72 +121,34 @@ createBackgroundSVG = (id , width , height , color) => {
 }
 
 
+testGraphicTrasnform = () => {
+    
+}
+
+
 testitme = ()=> {
-
-
-    //var svgns = "http://www.w3.org/2000/svg";
-    //var svg = document.createElementNS(svgns, 'svg');
 
     var svg = document.getElementById("ROOTSVG");
 
     var svgns = "http://www.w3.org/2000/svg";
-    var g = document.createElementNS(svgns, 'g');
-    g.setAttributeNS(null, 'id', 'selectorParentGroup');
-    g.setAttributeNS(null, 'transform', 'translate(0,0)');
-
-
     var text = document.createElementNS(svgns, 'text');
-
     text.setAttributeNS(null, 'fill', '#000000');
     text.setAttributeNS(null, 'stroke', '#000');
     text.setAttributeNS(null, 'stroke-width', '0');
-    text.setAttributeNS(null, 'x', 163.3);
-    text.setAttributeNS(null, 'y', 172.2);
+    text.setAttributeNS(null, 'x', 0);
+    text.setAttributeNS(null, 'y', 50);
     text.setAttributeNS(null, 'font-size', 24);
-
     text.setAttributeNS(null, 'text-anchor', 'start');
     text.setAttributeNS(null, 'style', 'cursor: text;');
-    
     text.innerHTML = "test"
-    
-
-
-
-    var path = document.createElementNS(svgns, 'path');
-    path.setAttributeNS(null, 'fill', 'none');
-    path.setAttributeNS(null, 'stroke', '#4F80FF');
-    path.setAttributeNS(null, 'shape-rendering', 'crispEdges');
-    path.setAttributeNS(null, 'd', 'M160.296875,142.796875 L238.546875,142.796875 238.546875,180.8125 160.296875,180.8125z');
-    
-
-    var line = document.createElementNS(svgns, 'line');
-    line.setAttributeNS(null, 'id', 'text_cursor');
-    line.setAttributeNS(null, 'stroke', '#333');
-    line.setAttributeNS(null, 'stroke-width', '1');
-    line.setAttributeNS(null, 'x1', '206.6476593017578');
-    line.setAttributeNS(null, 'y1', '145.796875');
-    line.setAttributeNS(null, 'x2', '206.6476593017578');
-    line.setAttributeNS(null, 'y2', '177.8125');
-    line.setAttributeNS(null, 'visibility', 'visible');
-    line.setAttributeNS(null, 'display', 'inline');
-
-    g.appendChild(text);
-    g.appendChild(path);
-    g.appendChild(line);
-
 
     
-    svg.appendChild(g);
-
-
-    var svgparent = document.getElementById("drawsvg");
-    svgparent.appendChild(svg);
+    let selector = document.getElementById('selector-g');
+    svg.insertBefore(text,selector);
     
-    setInterval("playTextCuror()", 500); // 3000ms(3초)가 경과하면 ozit_timer_test() 함수를 실행합니다.    
-
-
-
-    addItemEvent(g);
+    
+    //setInterval("playTextCuror()", 500); // 3000ms(3초)가 경과하면 ozit_timer_test() 함수를 실행합니다.    
+    addItemEvent(text);
 }
 
 

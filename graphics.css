@@ -1,0 +1,9 @@
+#drawsvg {
+    position: absolute;
+}
+
+#text-editor{
+    position: absolute;
+    border: 1px solid gold;
+    background-color: white;
+}

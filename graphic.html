@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer src="./graphics.js"></script>
+    <link rel="stylesheet" href="./graphics.css" type="text/css" >
+</head>
+<body>
+    <input id="ti">
+
+    <div>
+        <button onclick="testSetProperty('font-family','나눔고딕')">fontFamily</button>
+        <button onclick="testSetProperty('fill','#ff00ff')">color</button>
+        <button onclick="testSetProperty('font-size','15pt')">size</button>
+        <button onclick="testSetProperty('font-weight','bold')">bold</button>
+        <button onclick="testSetProperty('font-style','italic')">italic</button>
+        <button onclick="testSetProperty('text-decoration','underline')">underline</button>
+
+        <button onclick="testSetProperty('text-align','left')">left</button>
+        <button onclick="testSetProperty('text-align','center')">center</button>
+        <button onclick="testSetProperty('text-align','right')">underline</button>
+
+
+
+        <button onclick="testSetProperty('vertical-align','top')">top</button>
+        <button onclick="testSetProperty('vertical-align','middle')">middle</button>
+        <button onclick="testSetProperty('vertical-align','bottom')">bottom</button>
+
+        <button onclick="getProperties()">getProperties</button>
+        <button onclick="removeItem()">removeItemHistory</button>
+
+        <button onclick="setItemIdInfo()">createTable</button>
+        <button onclick="copyItemIdInfo()">copyItemIdInfo</button>
+
+    </div>
+
+    <div id="container">
+        <button onclick="itemManager.addRect(20,20,50,40)">add rect</button>
+        <button onclick="itemManager.addText(50,50,150,100,'#000000',18)">add text</button>
+        <div id="movename"></div>
+        <div id="scalename"></div>
+        <div id="drawsvg"></div>
+
+        <div id="text-editor" contenteditable="true">fff</div>
+    </div>
+</body>
+</html>
