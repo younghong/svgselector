@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./user/script.js"></script>
+</head>
+
+<body>
+    <button onclick="addUser()">사용자 추가</button>
+    <button onclick="addTable()">addTable</button>
+
+    <button onclick="testGetUserData()">getUserData</button>
+    <button onclick="testSetUserData()">setUserData</button>
+
+
+    <button onclick="testcreaUserMenu()">addUserMenu</button>
+    <button onclick="testcreaddUser()">addUSER</button>
+
+
+    <div id="container"></div>
+</body>
+
+</html>
+
+
+
+
+<ul id="userMenu" class="dropdown-menu" aria-labelledby="dLabel">
+
+    <li><a id="userItem" class="dropdown-item" href="#" onclick="selectUser(this)">참여자1</a></li>
+    <li><a id="userItem" class="dropdown-item" href="#" onclick="selectUser(this)">참여자2</a></li>
+    <li><a id="userItem" class="dropdown-item" href="#" onclick="selectUser(this)">참여자3</a></li>
+</ul>
+
+
+
+<ul class="ul-add-user" id="add-user">
+    <li>
+        <span>1</span>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="" value="참여자1">
+            <button type="button" class="btn btn-input-clear"></button>
+        </div>
+        <button class="btn btn-remove">삭제</button>
+    </li>
+    <li><span>2</span>
+        <div class="input-group"><input type="text" class="form-control" placeholder="" value="참여자2"><button
+                type="button" class="btn btn-input-clear"></button></div><button class="btn btn-remove">삭제</button>
+    </li>
+    <li><span>3</span>
+        <div class="input-group"><input type="text" class="form-control" placeholder="" value="참여자3"><button
+                type="button" class="btn btn-input-clear"></button></div><button class="btn btn-remove">삭제</button>
+    </li>
+</ul>

@@ -11,6 +11,7 @@ var ItemManager = function(container , w, h ){
     
     const svgns = "http://www.w3.org/2000/svg";
 
+    //remover
     createBackgroundSVG = (id , width , height , color) => {
         
         svgContainer = document.createElementNS(svgns, 'svg');
@@ -22,7 +23,7 @@ var ItemManager = function(container , w, h ){
         rootContainer.appendChild(svgContainer);
     }
     
-
+    //remover
     createSelector = () => {      
         
         Selector = document.createElementNS(svgns, 'g');
@@ -86,7 +87,7 @@ var ItemManager = function(container , w, h ){
     }
     
 
-
+    //remover
     ItemManager.prototype.addRect = (x,y,w,h) => {
         let rect = getRect(0,0,w,h);
         let child = getOverlapGraphic([rect],'rect',x,y);
@@ -98,6 +99,7 @@ var ItemManager = function(container , w, h ){
         addItem(child);
     }
     
+    //remover
     ItemManager.prototype.addText = (x,y,w,h,color,size) => {
 
         let text = getText(0,color,size);
@@ -114,7 +116,7 @@ var ItemManager = function(container , w, h ){
         addItem(child);
     }
     
-    
+    //remover
     getOverlapGraphic = (targets , type ,x,y) => {
     
         var g = document.createElementNS(svgns, 'g');
@@ -130,7 +132,7 @@ var ItemManager = function(container , w, h ){
         return g;
     }
     
-    
+    //rmover
     getRect = (x,y,w,h) => {
     
         //let color = '#'+Math.round(0xffffff * Math.random()).toString(16);
@@ -151,6 +153,7 @@ var ItemManager = function(container , w, h ){
         return rect;
     }
     
+    //rmover
     getText = (x,color,size) => {
         var text = document.createElementNS(svgns, 'text');
         text.setAttributeNS(null, 'x', x);
@@ -176,7 +179,7 @@ var ItemManager = function(container , w, h ){
     
     
     
-    
+    //remover
     addItemEvent = (target) => {
         target.addEventListener("click",clickHandler);
         target.addEventListener("mousemove", targetMoveHandler);
@@ -185,6 +188,7 @@ var ItemManager = function(container , w, h ){
         target.addEventListener("dblclick",targetDoubleClickHandler);
     }
     
+    //remover
     removeItemEvent = (target) => {
         target.removeEventListener("click",clickHandler);
         target.removeEventListener("mousemove", targetMoveHandler);
@@ -193,23 +197,25 @@ var ItemManager = function(container , w, h ){
     }
     
     
-    
+    //remover
     setTargetPosition = (target,x,y) => {
         let translate = 'translate('+x+','+y+')';
         target.setAttributeNS(null, 'transform', translate);
     }
     
+    //remover
     setTargetPositionX = (target,x) => {
         let translate = 'translate('+x+','+ getTargetPosition(target)[1] +')';
         target.setAttributeNS(null, 'transform', translate);
     }
     
+    //remover
     setTargetPositionY = (target,y) => {
         let translate = 'translate('+getTargetPosition(target)[0]+','+y+')';
         target.setAttributeNS(null, 'transform', translate);
     }
     
-    
+    //remover
     getTargetPosition = (target) => {
         let trasform =  target.getAttribute("transform");
         let values = trasform.split(' ');
@@ -234,33 +240,35 @@ var ItemManager = function(container , w, h ){
         return [x,y];
     }
     
+    //remover
     setTargetSize = (target,width,height) => {
         target.setAttributeNS(null, 'width', width);
         target.setAttributeNS(null, 'height', height);
     }
     
-    
+    //remover
     setTargetWidth = (target,width) => {
         target.setAttributeNS(null, 'width', width);
     }
     
-    
+    //remover
     setTargetHeight = (target,height) => {
         target.setAttributeNS(null, 'height', height);
     }
     
+    //remover
     getTargetSize = (child) =>{
         width = parseInt(child.getAttribute("width"));
         height = parseInt(child.getAttribute("height"));
         return [width , height];
     }
     
-    
+    //remover
     getTargetItem = (target) => {
         var child = target.children[0];
         return child;
     }
-    
+    //remover
     updateSelector = (target) => {
     
         let position = getTargetPosition(target);
@@ -349,7 +357,7 @@ var ItemManager = function(container , w, h ){
     
   
     
-    
+    //remover
     let currentTarget;
     let currentTargetType;
     
@@ -360,6 +368,7 @@ var ItemManager = function(container , w, h ){
     let mx;
     let my;
     
+    //remover
     targetDownHandler = (event) => {
     
         currentTarget=event.currentTarget;
@@ -379,6 +388,7 @@ var ItemManager = function(container , w, h ){
         updateSelector(currentTarget);
     }
     
+    //remover
     targetMoveHandler = (event) => {
         if( isMoveDown ){
             let x = event.pageX-startX;
@@ -388,6 +398,7 @@ var ItemManager = function(container , w, h ){
         }
     }
     
+    //remover
     targetMouseUpHandler = (event) => {
         isMoveDown=false;
         movename.innerText="move:false";
@@ -427,7 +438,7 @@ var ItemManager = function(container , w, h ){
         
     }
     
-    
+    //remover
     let isDown=false;
     let scaleW;
     let scaleH;
@@ -439,7 +450,7 @@ var ItemManager = function(container , w, h ){
     let mouseDownY;
     
     let currentTransTarget;
-    
+    //remover
     mouseDownHandler = (event) => {
     
         currentTransTarget = event.currentTarget;
@@ -459,7 +470,7 @@ var ItemManager = function(container , w, h ){
         mouseDownY = event.pageY;
     }
     
-    
+    //remover
     mouseMoveHandler = (event) => {
         if( isDown ){
     
@@ -527,6 +538,7 @@ var ItemManager = function(container , w, h ){
         }
     }
     
+    //remover
     mouseUpHandler = (event) => {
         isDown=false;
         scalename.innerText="scale:false";
@@ -540,7 +552,7 @@ var ItemManager = function(container , w, h ){
     }
     
     
-    
+    //remover
     clickHandler = (event) => {
         Selector.setAttribute("visibility","visible");
         currentTarget=event.currentTarget;
@@ -548,7 +560,7 @@ var ItemManager = function(container , w, h ){
     }
     
     
-    
+    //remover
     canvasMouseDownHandler = (event) => {
         if( isMoveDown == true || isDown == true ){
         }else{
@@ -569,9 +581,11 @@ var ItemManager = function(container , w, h ){
     movestate();
     scalestate();
 
+    //remover
     createBackgroundSVG(svgID,w,h,'green');
     createSelector();
 
+    //remover
     svgContainer.addEventListener("mouseup", mouseUpHandler);
     svgContainer.addEventListener("mousemove", mouseMoveHandler);
     svgContainer.addEventListener("mousedown", canvasMouseDownHandler);
@@ -589,7 +603,7 @@ var ItemManager = function(container , w, h ){
     
     }
 
-    
+    //remover
     setProperty = ( itor,attr,value) => {
     
         let item = itor.item;
@@ -691,13 +705,15 @@ var ItemManager = function(container , w, h ){
     
     
     
-    
+    //remover
     let items=[];
     
+    //remover
     addItem = (item) => {
         items.push( {item:item } );
     }
     
+    //remover
     removeItem = (item) => {
     
         item = currentTarget;
