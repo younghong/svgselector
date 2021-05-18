@@ -237,7 +237,7 @@ function SvgCanvas(){
         target.addEventListener("mousemove", this.itemMoveHandler);
         target.addEventListener("mousedown", this.itemDownHandler);
         target.addEventListener("mouseup", this.itemMouseUpHandler);
-        //target.addEventListener("dblclick",targetDoubleClickHandler);
+        target.addEventListener("dblclick",this.targetDoubleClickHandler);
     }
 
     this.removeItemEvent = (target) => {
@@ -254,6 +254,39 @@ function SvgCanvas(){
         this.updateSelector(event.currentTarget);
     }
 
+    this.targetDoubleClickHandler = (event) => {
+        
+        let texte = this.currentTarget.children[1];
+
+        let size = this.getTargetSize(this.getTargetItem(this.currentTarget));   
+        scaleW = size[0];
+        scaleH = size[1];
+
+        let textedito = document.getElementById('text-editor');
+        textedito.style.width=scaleW+'px';
+        textedito.style.height=scaleH+'px';
+        
+        textedito.style.fontFamily = texte.getAttribute('font-family');
+        textedito.style.fontSize = texte.getAttribute('font-size');
+        textedito.style.fontWeight = texte.getAttribute('font-weight');
+        textedito.style.fontStyle = texte.getAttribute('font-style');
+        //textedito.style.font = ;
+        //texte.getAttribute('font-decoration');
+
+        textedito.innerText = texte.innerHTML;
+
+        let position = this.getTargetPosition(currentTarget);
+        scaleX = position[0];
+        scaleY = position[1];
+
+       
+        
+    
+        textedito.style.left=(scaleX+rootContainer.offsetLeft)+'px';
+        textedito.style.top=(scaleY+rootContainer.offsetTop)+'px';
+
+        
+    }
 
 
     this.currentTarget;

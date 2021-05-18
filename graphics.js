@@ -225,7 +225,7 @@ var ItemManager = function(container , w, h ){
         //let scale = values[2];
     
         let translatevalue = translate.substring(10 , translate.length-1);
-        console.log(translatevalue);
+        //console.log(translatevalue);
         let position = translatevalue.split(',');
         x = parseInt(position[0]);
         y = parseInt(position[1]);
@@ -435,8 +435,30 @@ var ItemManager = function(container , w, h ){
         textedito.style.left=(scaleX+rootContainer.offsetLeft)+'px';
         textedito.style.top=(scaleY+rootContainer.offsetTop)+'px';
 
-        
+        itext.style.visibility='visible';
+        itext.focus();
+        itext.addEventListener('focusout',focusOutHandler);
+
+        //itext.setSelectionRange(0, itext.innerHTML.length);
+        selectText(itext);
     }
+
+    selectText = function(element){
+        var doc = document;
+        
+        if (doc.body.createTextRange) {
+            var range = document.body.createTextRange();
+            range.moveToElementText(element);
+            range.select();
+        } else if (window.getSelection) {
+            var selection = window.getSelection();        
+            var range = document.createRange();
+            range.selectNodeContents(element);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+     };
+
     
     //remover
     let isDown=false;
@@ -629,11 +651,11 @@ var ItemManager = function(container , w, h ){
                 }else if( value == "center" ){
                     text.setAttributeNS(null, 'text-anchor', 'start');
                     text.setAttribute('x',(w/2-width/2));
-                    console.log((w/2-width/2));
+                    //console.log((w/2-width/2));
                 }else if( value == "right" ){
                     text.setAttributeNS(null, 'text-anchor', 'end');
                     text.setAttribute('x',w);
-                    console.log(w-width);
+                    //console.log(w-width);
                 }
                 
                 itor[attr]=value;
@@ -746,15 +768,29 @@ var ItemManager = function(container , w, h ){
         setProperty(item,attr,value);
     }
 
+    this.getCurrentTarget = function(){
+
+        return currentTarget;
+
+        let idx = items.findIndex( (itor) => {
+            return currentTarget == itor.item;
+        });
+    
+        let item = items[idx];
+
+        return item;
+    }
+
+    this.getItems = function(){
+        return items;
+    }
+
+
 }
 
 var itemManager = new ItemManager('drawsvg',500,1000);
 
 
-this.addEventListener('keyup', (event) => {
-    const keyName = event.key;
-    console.log(keyName);
-});
 
 
 setItemIdInfo = () =>{
@@ -775,7 +811,7 @@ getItemIdInfo = () =>{
         return itor.id;
     } );
 
-    console.log(idList);
+    //console.log(idList);
 
     return idList;
 }
@@ -801,7 +837,7 @@ copyItemIdInfo = () =>{
     copyText.select();
     copyText.setSelectionRange(0, 99999)
     document.execCommand("copy");
-    console.log(copyText.value);
+    //console.log(copyText.value);
     container.removeChild(copyText);
 }
 
@@ -854,3 +890,73 @@ createInfoTable = (container ,rows,columns) => {
 
 }
 
+/*============================================
+
+itext 구현 작업.
+
+============================================*/
+
+
+var itext = document.getElementById('text-editor');
+
+
+
+itext.addEventListener('keyup', itextKeyEvent);
+
+
+function itextKeyEvent(event){
+    const keyName = event.key;
+    console.log(keyName);
+
+    if(keyName == 'Enter'){
+        event.preventDefault();
+        itext.removeEventListener('focusout',focusOutHandler);
+        itext.style.visibility='hidden';
+        var text = itemManager.getCurrentTarget();
+        text.children[1].innerHTML = itext.textContent;
+    }else if(keyName == 'Escape'){
+        event.preventDefault();
+        event.stopPropagation();
+        event.stopImmediatePropagation();
+        itext.removeEventListener('focusout',focusOutHandler);
+        itext.style.visibility='hidden';
+    }
+}
+
+
+
+function focusHandler(event){
+    event.preventDefault();
+    console.log('focus');
+}
+
+function focusOutHandler(event){
+    event.preventDefault();
+    console.log('focusout');
+    itext.removeEventListener('focusout',focusOutHandler);
+    itext.style.visibility='hidden';
+    var text = itemManager.getCurrentTarget();
+    text.children[1].innerHTML = itext.textContent;
+}
+
+
+function testSetAttr1(){
+
+    var text = itemManager.getCurrentTarget();
+
+    var matrix = text.createSVGMatrix();
+    matrix = matrix.translate(10, 11);
+
+    //text.setAttribute('transform','translate(10,11)');
+}
+
+function testSetAttr2(){
+
+    var text = itemManager.getCurrentTarget();
+    
+    var matrix = text.createSVGMatrix();
+    matrix.a = 2;
+
+    //text.setAttribute('transform','scale(0.8)');
+    
+}
