@@ -308,21 +308,7 @@ userUsedClickHandler = function(event){
     }
     result.used = !result.used;
 
-    
-
-
-
-
-
-
-
-
-
-
     console.log(userManager.getUsers());
-
-    
-    
 }
 
 userRequredClickHandler = function(event){
