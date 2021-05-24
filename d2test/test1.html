@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+
+        // const productTmpl = p => '
+        //     <div class="product">
+        //         <div class="name">${p.name}</div>
+        //         <div class="price">${p.price.toLocaleString()}</div>
+        //     </div>
+        // ';
+
+        // productTmpl({name:'반팔 티셔츠',price:19000});
+
+        const products = [
+            {name:'a',price:1000},
+            {name:'b',price:1100}
+        ];
+
+        const Product = {};
+        Product.list = () => products;
+
+        Product.list.tmpl = products => `
+            <table>
+                <tr>
+                    <td>이름</td>
+                    <td>가격</td>
+                </tr>
+                ${products.map(p => `
+                    <tr>
+                        <td>${p.name}</td>
+                        <td>${p.price}</td>
+                    </tr>
+                `).join('')}
+            </table>
+        `
+
+        console.log( Product.list.tmpl(Product.list()));
+
+    </script>
+</head>
+<body>
+    
+
+</body>
+</html>
