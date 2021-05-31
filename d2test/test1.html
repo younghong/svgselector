@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="./script.js"></script>
+</head>
+<body>
     <script>
 
 
@@ -38,14 +41,23 @@
                     </tr>
                 `).join('')}
             </table>
-        `
+        `;
 
-        console.log( Product.list.tmpl(Product.list()));
+        const el = html => {
+            const wrap = document.createElement('div');
+            wrap.innerHTML = html;
+            return wrap.children[0];
+        }
+
+        const $ = (sel,parent=document) => parent.querySelector(sel);
+            
+        const append = (parent,child) => parent.appendChild(child);
+
+        append(
+            $('body'),
+            el(Product.list.tmpl(Product.list()))
+        );
 
     </script>
-</head>
-<body>
-    
-
 </body>
 </html>

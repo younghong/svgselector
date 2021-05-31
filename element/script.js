@@ -88,4 +88,29 @@ window.onload = function(){
 
 clickHandler = function(event){
     console.log(event.currentTarget.id);
-}
+
+    
+
+
+    this.nameGenerater = function(name){
+        var count=0;
+        
+        myCanvas.items.forEach(function (iter){
+    
+            if(iter.name == name){
+                var has = myCanvas.checkID(type+count);
+                if(has==false)return type+count;
+                count++;
+            }
+        });
+        return type+count;
+    };
+    
+    this.checkName = function(name){
+        
+        var result = myCanvas.items.some(function(iter){
+            return iter.name == name;
+        });
+    
+        return result;
+    };
