@@ -1,5 +1,8 @@
-const MAX=25;
-const TOTAL=30;
+
+const TOTAL=50;
+const WW=6;
+const MAX=WW*WW;
+
 let TempNumbers;
 let currentCount=1;
 
@@ -13,7 +16,7 @@ initialize = function(){
     let firstNumbers = numbers.slice(0,MAX);
     TempNumbers = numbers.slice(MAX,numbers.length);
     shakeValues(firstNumbers,MAX );
-    createTemplate(firstNumbers,5);
+    createTemplate(firstNumbers,WW);
 }
 
 createNumbers = function(count){
@@ -32,7 +35,6 @@ shakeValues = function(numbers, count){
         b = parseInt( Math.random()*count );
         shakeValue(numbers,a,b);
     }
-    console.log(numbers);
 }
 
 shakeValue = function(numbers,a,b){
@@ -70,6 +72,15 @@ itemClickHandler = function(event){
     if( selectedvalue == TOTAL ){
         clearInterval(Timer);
         event.target.innerHTML='';
+        if( count < 80 ){
+            alert(`${count}초가 걸리셨네요 당신은 20대~` );
+        }else if(count < 100){
+            alert(count+'초가 걸리셨네요 당신은 30대~');
+        }else if(count < 120){
+            alert(count+'초가 걸리셨네요 당신은 40대~');
+        }else{
+            alert(count+'초가 걸리셨네요 당신은 50대~');
+        }
     }else{
         if(selectedvalue == currentCount ){
 
@@ -95,15 +106,15 @@ itemMouseOutHandler = function(event){
 }
 
 let Timer;
+let count=0;
 
 initTimer = function(){
 
     let timer = document.getElementById('timer');
-    let count=0;
+    count=0;
 
     Timer = setInterval(function(){
         count++
-        timer.innerHTML=count;
-        console.log(count);
+        timer.innerHTML=count+'초 지났어요~';
     },1000);
 }
