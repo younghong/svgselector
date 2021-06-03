@@ -1,6 +1,6 @@
 
 const TOTAL=50;
-const WW=6;
+const WW=5;
 const MAX=WW*WW;
 
 let TempNumbers;
@@ -68,22 +68,22 @@ itemClickHandler = function(event){
 
     let selectedvalue = parseInt(event.target.innerHTML);
 
+    if(selectedvalue == currentCount ){
 
-    if( selectedvalue == TOTAL ){
-        clearInterval(Timer);
-        event.target.innerHTML='';
-        if( count < 80 ){
-            alert(`${count}초가 걸리셨네요 당신은 20대~` );
-        }else if(count < 100){
-            alert(count+'초가 걸리셨네요 당신은 30대~');
-        }else if(count < 120){
-            alert(count+'초가 걸리셨네요 당신은 40대~');
+        if( selectedvalue == TOTAL ){
+            clearInterval(Timer);
+            event.target.innerHTML='';
+            if( count < 80 ){
+                alert(`${count}초가 걸리셨네요 당신은 20대~` );
+            }else if(count < 100){
+                alert(count+'초가 걸리셨네요 당신은 30대~');
+            }else if(count < 120){
+                alert(count+'초가 걸리셨네요 당신은 40대~');
+            }else{
+                alert(count+'초가 걸리셨네요 당신은 50대~');
+            }
+            window.location.reload();
         }else{
-            alert(count+'초가 걸리셨네요 당신은 50대~');
-        }
-    }else{
-        if(selectedvalue == currentCount ){
-
             if( TempNumbers.length == 0 ){
                 event.target.innerHTML='';
                 currentCount++;
@@ -92,9 +92,11 @@ itemClickHandler = function(event){
                 event.target.innerHTML = value;
                 currentCount++;
             }
-
         }
     }
+
+
+
 }
 
 itemMouseOverHandler = function(event){
@@ -102,7 +104,7 @@ itemMouseOverHandler = function(event){
 }
 
 itemMouseOutHandler = function(event){
-    event.target.style.backgroundColor = 'aquamarine';
+    event.target.style.backgroundColor = 'black';
 }
 
 let Timer;

@@ -1,10 +1,16 @@
 td {
-    width: 50px;
-    height: 50px;
-    background-color: aquamarine;
+    width: 65px;
+    height: 65px;
+    background-color: black;
     text-align: center;
     vertical-align: middle;
     user-select: none;
     cursor: grab;
+    border: 1px solid black;
     /* pointer-events:none; */
+}
+
+tr {
+    color: white;
+    font-size: 30px;
 }
