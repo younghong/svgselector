@@ -16,9 +16,17 @@
     <script>
         $( document ).ready( function() {
           $( 'button' ).click( function() {
-            $( '#a' ).animate( {
-              opacity:.1
-            },300 );
+
+            var a = document.getElementById('a');
+            
+
+            $( '#'+a.id ).animate({height: "300px"}, 
+            {
+              duration: 2000,
+              complete: function() {
+                alert('hey');
+              }
+            });
           } );
         } );
       </script>
