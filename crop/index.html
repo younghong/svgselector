@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>
+
+        crop = function(){
+
+
+            
+
+            var basic = $('#demo-basic').croppie({
+                viewport: {
+                    width: 150,
+                    height: 200
+                }
+            });
+            basic.croppie('bind', {
+                url: 'demo/cat.jpg',
+                points: [77,469,280,739]
+            });
+            //on button click
+            basic.croppie('result', 'html').then(function(html) {
+                // html is div (overflow hidden)
+                // with img positioned inside.
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <button onclick="crop()">crop</button>
+    <div id="demo-basic"></div>
+    <img src="./test.jpg" >
+</body>
+</html>
