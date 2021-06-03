@@ -53,6 +53,7 @@ createTemplate = (numbers,columnCount) => {
             table.appendChild(tr);
         }
         let td = document.createElement('td');
+        td.setAttribute('id','td'+i);
         td.addEventListener('click',itemClickHandler);
         td.addEventListener('mouseover',itemMouseOverHandler);
         td.addEventListener('mouseout',itemMouseOutHandler);
@@ -88,9 +89,26 @@ itemClickHandler = function(event){
                 event.target.innerHTML='';
                 currentCount++;
             }else{
-                let value = TempNumbers.shift();
-                event.target.innerHTML = value;
-                currentCount++;
+
+
+                
+
+                $('#'+event.target.id).animate({opacity:0.1}, 
+                {
+                  duration: 200,
+                  complete: function() {
+                    
+                    let value = TempNumbers.shift();
+                    event.target.innerHTML = value;
+                    currentCount++;
+
+                    event.target.style.opacity = 1;
+
+                  }
+                });
+
+
+
             }
         }
     }
