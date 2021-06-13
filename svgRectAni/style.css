@@ -1,0 +1,32 @@
+svg {
+    position: absolute;
+    width: 50vw;
+    height: 50vh;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+  }
+
+  rect, line {
+    fill: none;
+    stroke: #000;
+    stroke-width: 1px;
+    
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 4px;
+    stroke-dashoffset: 8px;
+    animation: stroke 0.2s linear infinite;
+  }
+  
+  rect {
+    stroke-width: 2px;
+  }
+
+
+  @keyframes stroke {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
