@@ -56,8 +56,37 @@ keyupHandler = function(event){
         Log(AREA);
     }
 
- 
 }
+
+
+checkSider = function(r,c){
+    //좌
+    let ll = -1;
+    if(r>0)ll =AREA[r-1][c].value;
+    
+    //우
+    let rr = -1;
+    if(r < VIEW_COUNT-1)rr =AREA[r+1][c].value;
+
+    //상
+    let tt = -1;
+    if(c>0)tt =AREA[r][c-1].value;
+
+    //하
+    let bb = -1;
+    if(c<VIEW_COUNT-1)bb =AREA[r][c+1].value;
+
+    if(ll==0){
+        itemSwitch( AREA[r][c] , AREA[r-1][c] );
+    }else if(rr==0){
+        itemSwitch( AREA[r][c] , AREA[r+1][c] );
+    }else if(tt==0){
+        itemSwitch(AREA[r][c] , AREA[r][c-1] );
+    }else if(bb==0){
+        itemSwitch( AREA[r][c] , AREA[r][c+1] );
+    }
+}
+
 
 
 shakeValues = function(array, count){
@@ -133,6 +162,26 @@ load2 = function(){
             OC[i+1] = [rowIndex,columnIndex];
 
 
+            canvas.addEventListener('click',function(event){
+
+                var targetItem;
+
+                for( var i=0; i<AREA.length; i++ ){
+                    var row=AREA[i];
+                    for( var j=0; j<row.length; j++ ){
+                        if(row[j].element==event.target){
+                            targetItem=row[j];
+                            break;
+                        }
+                    }
+                    if(targetItem!=undefined)break;
+                }
+
+                console.log( 'test',targetItem ,i,j);
+                checkSider(i,j);
+
+            });
+
 
             ix=w*rowIndex;
             iy=h*columnIndex;
@@ -162,7 +211,9 @@ load2 = function(){
         setPosition2();
         shakeValues(AREA,ELEMENT_COUNT);
     };
-    img.src = './test.jpg';
+    //img.src = './test.jpg';
+    img.src = './gologo.png';
+    
 }
 
 
