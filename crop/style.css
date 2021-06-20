@@ -4,6 +4,10 @@
     margin-top: 500px;
 }
 
+#container-org {
+    border: 1px solid black;
+}
+
 li {
     width: 50px;
     height: 50px;
@@ -17,6 +21,6 @@ li {
 }
 
 #container2 > canvas {
-    border: 5px solid chartreuse;
+    border: 1px solid chartreuse;
     position: absolute;
 }

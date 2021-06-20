@@ -12,7 +12,29 @@ const VIEW_COUNT=3;
 
 window.onload = function(){
     window.addEventListener('keyup',keyupHandler);
-    load2();
+    load2('./gologo.png');
+
+    document.getElementById('sample').addEventListener('click',function(){
+        var input = document.createElement('input');
+        input.setAttribute('type','file');
+        input.setAttribute('accept','.png,.jpg');
+        input.onchange = function(evt){
+
+            for (let f of evt.target.files) {
+                const url = URL.createObjectURL(f);
+                const img = new Image();
+                //img.src = url;
+                load2(url);
+
+                document.getElementById('sample').src = url;
+            }
+            
+        }
+
+
+        input.click();
+
+    });
 }
 
 
@@ -133,33 +155,71 @@ itemSwitch = function(a,b){
 }
 
 
-load2 = function(){
+load2 = function(src){
 
     var container   = document.getElementById('container2');
-    
+    container.innerHTML='';
+
     const ELEMENT_COUNT=9;
+
+    const viewW=100;
+    const viewH=100;
+
 
     var img = new Image();
     img.onload = function() {
         
         let w = img.width/3;
         let h = img.height/3;
+
+       // w=100;
+        //h=100;
+
         let rowIndex;
         let columnIndex;
         let count=0;
+
+
+        var org = document.getElementById('container-org');
+        //org.style.width = img.width+'px';
+        //org.style.height = img.height+'px';
+
+        
+        document.getElementById('sample').style.width = '300px';
+        document.getElementById('sample').style.height = '300px';
+
+        org.style.width = '300px';
+        org.style.height = '300px';
+
+
+
         for( let i=0; i<ELEMENT_COUNT; i++ ){
 
-            var canvas      = document.createElement('canvas');
-            canvas.width = w;
-            canvas.height= h;
+            var canvas = document.createElement('canvas');
+            canvas.width = 100;
+            canvas.height= 100;
+
+            //1000 : 100 = 1 ? x
+
+
+
             container.appendChild(canvas);
             var ctx = canvas.getContext("2d");
 
+            
             rowIndex = count%VIEW_COUNT;
             columnIndex = parseInt(count/VIEW_COUNT);
 
             console.log(rowIndex,columnIndex);
             OC[i+1] = [rowIndex,columnIndex];
+
+            canvas.addEventListener('mouseover',function(){
+                event.target.style.border='2px solid chartreuse';
+            });
+
+            canvas.addEventListener('mouseout',function(){
+                event.target.style.border='1px solid chartreuse';
+            });
 
 
             canvas.addEventListener('click',function(event){
@@ -201,7 +261,7 @@ load2 = function(){
                 // 0,50,50,50  / 50,50,50,50 / 100,50,50,50
                 // 0,100,50,50  / 50,100,50,50 / 100,100,50,50
 
-                ctx.drawImage(img, ix,iy,iw,ih, 0,0,iw,ih);
+                ctx.drawImage(img, ix,iy,iw,ih, 0,0,viewW,viewH);
                 count++;
             }
         }
@@ -212,7 +272,8 @@ load2 = function(){
         shakeValues(AREA,ELEMENT_COUNT);
     };
     //img.src = './test.jpg';
-    img.src = './gologo.png';
+    //img.src = './gologo.png';
+    img.src = src;
     
 }
 
