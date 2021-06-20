@@ -12,7 +12,7 @@ const VIEW_COUNT=3;
 
 window.onload = function(){
     window.addEventListener('keyup',keyupHandler);
-    load2('./gologo.png');
+    load2('./dog.jpg');
 
     document.getElementById('sample').addEventListener('click',function(){
         var input = document.createElement('input');
