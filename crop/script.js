@@ -35,7 +35,27 @@ window.onload = function(){
         input.click();
 
     });
+
+
+    initTimer();
 }
+
+let Timer;
+let count=0;
+
+initTimer = function(){
+
+    let timer = document.getElementById('timer');
+    count=0;
+
+    Timer = setInterval(function(){
+        count++
+        timer.innerHTML=count+'초 지났어요~';
+    },1000);
+}
+
+
+
 
 
 keyupHandler = function(event){
@@ -201,8 +221,6 @@ load2 = function(src){
 
             //1000 : 100 = 1 ? x
 
-
-
             container.appendChild(canvas);
             var ctx = canvas.getContext("2d");
 
@@ -213,11 +231,11 @@ load2 = function(src){
             console.log(rowIndex,columnIndex);
             OC[i+1] = [rowIndex,columnIndex];
 
-            canvas.addEventListener('mouseover',function(){
+            canvas.addEventListener('mouseover',function(event){
                 event.target.style.border='2px solid chartreuse';
             });
 
-            canvas.addEventListener('mouseout',function(){
+            canvas.addEventListener('mouseout',function(event){
                 event.target.style.border='1px solid chartreuse';
             });
 
@@ -237,7 +255,7 @@ load2 = function(src){
                     if(targetItem!=undefined)break;
                 }
 
-                console.log( 'test',targetItem ,i,j);
+                console.log( 'test',AREA);
                 checkSider(i,j);
 
             });
@@ -255,7 +273,7 @@ load2 = function(src){
                 ctx.fill();
             }else{
                 if(AREA[rowIndex]==undefined)AREA[rowIndex]=[];
-                AREA[rowIndex][columnIndex]={element:canvas,value:1};
+                AREA[rowIndex][columnIndex]={element:canvas,value:1,index:count,name:count+'번'};
 
                 // 0,0,50,50  / 50,0,50,50 / 100,0,50,50
                 // 0,50,50,50  / 50,50,50,50 / 100,50,50,50
