@@ -14,7 +14,7 @@ list.forEach(
     (iter)=>{
         console.log(filter(iter));
     } 
-    );
+);
 
 
 
