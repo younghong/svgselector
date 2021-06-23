@@ -1,0 +1,152 @@
+
+
+
+======================================================================
+[undo redo]
+
+1. svg tag 되돌리기. 다시실행
+
+2. 아이템의 속성값 처리.
+
+1,2번을 통합하여 아이템에 값을 변경하면 svg tag도 같이 변경되도록 구조 유지
+
+3. undo redo Manager class 설계
+-사용자 행위: undo Manager 등록
+
+예)
+사용자가 Text 아이템을 생성.
+HistoryManager.addUndo( {action:'add', targets:[Text], attrs:[{x:0,y:0...}] } );
+
+HistoryManager.currentStep = 1;
+
+undo 실행
+HistoryManager.undo();
+var can = HistoryManager.canUndo(); // 실행 가능여부 판단.  length 또는 action값이나 target 값이 안맞는지 확인.
+can == true 이면 실행.
+HistoryManager.excuteUndo();
+
+HistoryManager.currentStep-1 = 0;
+HistoryManager.get(0);
+
+if item.acton == 'add' 이면 delete 호출 //{action:'add', targets:[Text], attrs:[{x:0,y:0...}] }
+
+redo 실행
+
+HistoryManager.redo();
+var can = HistoryManager.canRedo(); // 실행 가능여부 판단.  length 또는 action값이나 target 값이 안맞는지 확인.
+can == true 이면 실행.
+HistoryManager.excuteRedo();
+
+HistoryManager.currentStep는 현재 0
+HistoryManager.get(0);
+
+item.action이 add이면 아이템 add 호출하고 히스토리 step 카운트를 늘려줌
+
+HistoryManager.currentStep+1 = 1;
+
+===================================================================================================================
+[action]
+add
+remove
+property (move,scale,속성변경 등)
+===================================================================================================================
+
+
+
+[ 
+    {action:'add'}, 
+    {action:'remove'},
+    {action:'move'},
+    {action:'add'},
+    {action:'scale'},
+    {action:'add'}, 
+    {action:'remove'},
+    {action:'move'},
+    {action:'add'},
+    {action:'scale'}
+]
+
+
+
+Sign, action property , inverse property 
+Text, action property , inverse property 
+
+
+
+
+사용자가 Text 아이템의 좌표를 이동.
+
+HistoryManager.addUndo( {targets:['Text','Sign'], motion:[{x:100,y:200},{x:10,y:30}]} );
+
+
+
+
+        //history scale
+        var target = myCanvas.getCurrentItem();
+        actionP = myCanvas.getHistoryProperty(target,['x','y','width','height']);
+
+
+        //history scale
+        var target = myCanvas.getCurrentItem();
+        inverseP = myCanvas.getHistoryProperty(target,['x','y','width','height']);
+
+
+                        var applyList=[
+                    {
+                        target:target,
+                        actionProperties:actionP,
+                        inverseProperties:inverseP
+                    }
+                ];
+            
+                historyManager.add('scale',applyList,myCanvas.setProperties,myCanvas.setProperties);
+
+
+======================================================================
+
+[itext]
+1.text아이템을 더블클릭하면 편집모드로 들어감.
+    -focus out event 등록
+    -keyboard event 등록  => enter , escape 이벤트 처리.
+
+
+2.편집모드는 객체 위에 div contexteditable을 켬.
+3.div input의  이벤트
+    -enter: 입력값 저장하고 편집모드 나감
+    -focusOut: 입력값 저장하고 편집모드 나감
+    -esc: 입력값 취소하고 편집모드 나감
+
+======================================================================
+
+
+
+
+
+
+======================================================================
+[update display 기능]
+
+1.텍스트 입력이 완료,수정되면  텍스트를 화면의 정렬대로 이동시켜야 함.
+
+2.아이템의 스케일이 조절되면 텍스트 화면이 정렬 속성값으로 갱신되어야 함.
+
+갱신대상 속성:
+- text align
+- vertical align
+
+
+======================================================================
+
+
+
+tooltip  title tag추가
+
+
+clipPath 속성 추가
+        <g fill="white" stroke="green" stroke-width="1" transform="translate(143,495)" name="text" type="text"
+            clip-path="url(#svgPath)">
+
+
+            <clipPath id="svgPath">
+                <rect width="201" height="51" />
+            </clipPath>
