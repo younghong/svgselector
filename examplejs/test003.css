@@ -1,0 +1,9 @@
+textarea {
+    resize: none;
+    overflow: hidden;
+    line-height: 1;
+    transform-origin: left top;
+    word-break: break-all;
+    padding-left: 0;
+    padding-right: 0;
+}
