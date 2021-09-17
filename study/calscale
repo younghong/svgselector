@@ -1,0 +1,75 @@
+/**
+ * text를 넘기면 최적화된 scale을 반환한다.
+ */
+function ScaleChecker() {
+
+    var Checker=this;
+
+    this.scale;
+    this.pt = 75;
+    this.px = 100;
+    this.text;
+    this.itemWidth;
+    this.itemHeight;
+    this.callback;
+
+    init = function(s,t,w,h,func){
+        Checker.scale = s;
+        Checker.text = t;
+        Checker.itemWidth = w;
+        Checker.itemHeight = h;
+        Checker.callback = func;
+    }
+
+    run = function(){
+        if( Checker.isOver() ){
+            Checker.scale -= 0.01;
+            run();
+        }else{
+            console.log(Checker.scale);
+        }
+    }
+    
+    isOver = function(){
+        var count = Checker.getUpTotalLineCount();
+        var text_height = Checker.px * count * Checker.scale;
+        return text_height >= Checker.itemHeight;
+    }
+    
+    this.getUpTotalLineCount = function(){
+        var px=Checker.getPoint2Pixcel(Checker.pt * Checker.scale);
+        var totalCount = 0;
+        Checker.text.split('\n').forEach(function(line){
+            totalCount+=Checker.getTextLineCount(line.split(''),px);
+        });
+        return totalCount;
+    }
+    
+    this.getPoint2Pixcel = function(value){
+        var c = 96/72;
+        return Math.ceil(c*value);
+    }
+    
+    this.getTextLineCount = function(text,px){
+        var rowCount=1;
+        var size=0;
+        text.forEach(function(word){
+            var o = Checker.measureText(word,px);
+            if( (size+o.width) > Checker.itemWidth ){
+                rowCount++;
+                size=o.width;
+            }else{
+                size+=o.width;
+            }
+        });
+        return rowCount;
+    }
+    
+    this.measureText = function(txt,size) {
+        var testFont = size +'px ' + this.fontFamily;  
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext("2d");
+        ctx.font = testFont;    
+        return ctx.measureText(txt);
+    }
+}

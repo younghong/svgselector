@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        const log = console.log;
+        
+
+        getdata = function(){
+
+            return new Promise( function(resolve,reject){
+                setTimeout(function(){
+                    resolve('a');
+                },1000);
+            } );
+        }
+
+        getdata2 = async function(){
+            setTimeout( ()=>{}, 2500);
+            return 'b';
+        }
+
+        window.onload = function(){
+
+            var a = await getdata();
+            var b = await getdata2();
+
+            print(a,b);
+
+            // a.then(function(msg){
+            //     print(msg,b);
+            // });
+
+            
+        }
+
+        print = function(x,y){
+            log(x,y);
+        }
+
+    </script>
+
+    <style>
+
+        body 
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: black;
+        }
+
+
+
+        .box 
+        {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #fff;
+            animation: rotate 5s linear infinite;
+        }
+
+        @keyframes rotate 
+        {
+            0%
+            {
+                transform: rotate(0deg);
+            }
+
+            100%
+            {
+                transform: rotate(360deg);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="box"></div>
+
+</body>
+</html>
